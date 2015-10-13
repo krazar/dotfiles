@@ -1,8 +1,8 @@
 #!/bin/bash
 
 
-# to maintain cask .... 
-#     brew update && brew upgrade brew-cask && brew cleanup && brew cask cleanup` 
+# to maintain cask ....
+#     brew update && brew upgrade brew-cask && brew cleanup && brew cask cleanup`
 
 
 # Install native apps
@@ -18,7 +18,7 @@ brew cask install onepassword
 brew cask install rescuetime
 brew cask install flux
 brew cask install dashlane
-brew cask isntall bettertouchtool
+brew cask install bettertouchtool
 brew cask install slack
 brew cask install skype
 brew cask install tunnelblick
@@ -27,9 +27,10 @@ brew cask install skitch
 
 # dev
 brew cask install iterm2
-brew cask install sublime-text
+brew cask install sublime-text3
 brew cask install imagealpha
 brew cask install imageoptim
+brew cask install java7
 brew cask install webstorm
 brew cask install cyberduck
 brew cask install gas-mask
