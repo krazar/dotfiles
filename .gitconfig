@@ -1,8 +1,12 @@
 [alias]
+	cod = checkout develop
+	com = checkout master
+	med = merge develop --no-ff
 	c = commit -am
 	up = pull
 	p = push
 	s = status -s
+	st = status -s
 	sclone = clone --depth=1
 	df = diff --color --color-words --abbrev
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --

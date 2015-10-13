@@ -17,17 +17,37 @@ brew cask install gyazo
 brew cask install onepassword
 brew cask install rescuetime
 brew cask install flux
+brew cask install dashlane
+brew cask isntall bettertouchtool
+brew cask install slack
+brew cask install skype
+brew cask install tunnelblick
+brew cask install skitch
+
 
 # dev
 brew cask install iterm2
 brew cask install sublime-text
 brew cask install imagealpha
 brew cask install imageoptim
+brew cask install webstorm
+brew cask install cyberduck
+brew cask install gas-mask
+brew cask install visual-studio-code
+brew cask install android-file-transfer
+brew cask install mongohub
+
+
 
 # fun
 brew cask install limechat
 brew cask install miro-video-converter
 brew cask install horndis               # usb tethering
+
+# relax
+brew cask install utorrent
+brew cask install plex-home-theater
+brew cask install spotify
 
 # browsers
 brew cask install google-chrome-canary
@@ -43,10 +63,3 @@ brew cask install vlc
 brew cask install gpgtools
 brew cask install licecap
 brew cask install utorrent
-
-
-# Not on cask but I want regardless.
-
-# 3Hub   https://itunes.apple.com/us/app/3hub/id427515976?mt=12 
-# File Multi Tool 5
-# Phosphor

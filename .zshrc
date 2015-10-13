@@ -12,7 +12,7 @@ fpath=( "$HOME/.zfunctions" $fpath )
 
 
 # antigen time!
-source ~/code/antigen/antigen.zsh
+source ${HOME}/dotfiles/antigen/antigen.zsh
 
 
 ######################################################################
