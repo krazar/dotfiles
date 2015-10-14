@@ -27,3 +27,5 @@ Thumbs.db
 
 #private file
 .extra
+#simlink from git => see setup a new machine
+bin/diff-highlight
