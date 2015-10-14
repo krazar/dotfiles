@@ -7,6 +7,7 @@ for file in ~/.{extra,bash_prompt,exports,aliases,functions}; do
 done
 unset file
 
+
 # to help sublimelinter etc with finding my PATHS
 case $- in
    *i*) source ~/.extra

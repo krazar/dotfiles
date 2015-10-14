@@ -30,9 +30,6 @@ $b command-not-found
 # Helper for extracting different types of archives.
 $b extract
 
-# atom editor
-$b atom
-
 # homebrew  - autocomplete on `brew install`
 $b brew
 $b brew-cask
@@ -110,6 +107,3 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 
 
 # Load default dotfiles
 source ~/.bash_profile
-
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

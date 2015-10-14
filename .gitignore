@@ -4,7 +4,7 @@
 .vim/swaps/*
 .vim/undo
 
-# git credential file 
+# git credential file
 .gitconfig.local
 
 
@@ -23,4 +23,7 @@ Thumbs.db
 .Trashes
 
 # Compiled Python files
-*.pyc
+*.pyc.
+
+#private file
+.extra

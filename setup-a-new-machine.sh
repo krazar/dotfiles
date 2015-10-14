@@ -98,11 +98,14 @@ echo $BASH_VERSION # should be 4.x not the old 3.2.X
 ln -sf "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ~/bin/subl
 cp -r init/Preferences.sublime-settings ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/Preferences.sublime-settings
 
+### add some more link
+ln -sf "$(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight" ~/bin/diff-highlight
 ###
 ##############################################################################################################
+#Fixing  path for  El Capitan
 
-
-
+rm -rf /etc/zprofile
+sudo chown $(whoami):admin /usr/local && sudo chown -R $(whoami):admin /usr/local
 ##############################################################################################################
 ### remaining configuration
 ###
