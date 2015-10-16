@@ -35,7 +35,7 @@ $b brew
 $b brew-cask
 
 # Tracks your most used directories, based on 'frecency'.
-$b robbyrussell/oh-my-zsh plugins/z
+$b z
 
 # nicoulaj's moar completion files for zsh -- not sure why disabled.
 # $b zsh-users/zsh-completions src
