@@ -51,6 +51,7 @@ brew cask install plex-home-theater
 brew cask install spotify
 
 # browsers
+brew cask install google-chrome
 brew cask install google-chrome-canary
 brew cask install firefox-nightly
 brew cask install webkit-nightly
