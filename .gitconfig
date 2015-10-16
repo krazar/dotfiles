@@ -97,3 +97,6 @@
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
 	required = true
+[user]
+	email = marot.pierre@gmail.com
+	name = Pierre Marot

@@ -93,14 +93,15 @@ echo $BASH_VERSION # should be 4.x not the old 3.2.X
 # iterm with more margin! http://hackr.it/articles/prettier-gutter-in-iterm-2/
 #   (admittedly not as easy to maintain)
 ##  Install NVM ##
+pushd
 git clone https://github.com/creationix/nvm.git ~/.nvm && cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`
+popd
 
-# setting up the sublime symlink
-ln -sf "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ~/bin/subl
+
 cp -r init/Preferences.sublime-settings ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/Preferences.sublime-settings
 
 ### add some more link
-ln -sf "$(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight" ~/bin/diff-highlight
+ln -sf "$(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight" ~/dotfiles/bin/diff-highlight
 ###
 ##############################################################################################################
 #Fixing  path for  El Capitan
@@ -118,7 +119,7 @@ sudo chown $(whoami):admin /usr/local && sudo chown -R $(whoami):admin /usr/loca
 
 # set up osx defaults
 #   maybe something else in here https://github.com/hjuutilainen/dotfiles/blob/master/bin/osx-user-defaults.sh
-sh .osx
+#sh .osx
 
 # setup and run Rescuetime!
 
