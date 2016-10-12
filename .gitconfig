@@ -10,7 +10,8 @@
 	sclone = clone --depth=1
 	df = diff --color --color-words --abbrev
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
-	co = checkout
+	co = checkoutjkk
+  release = "!f() { git com && npm version ${1-patch} && git push && git push --tags && git cod && git merge master --no-ff && git push &&  git com; }; f"
 
 	# Show the diff between the latest commit and the current state
 	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"

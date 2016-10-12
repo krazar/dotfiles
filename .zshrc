@@ -105,3 +105,10 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 
 
 # Load default dotfiles
 source ~/.bash_profile
+
+# The next line updates PATH for the Google Cloud SDK.
+source '/Users/krazar/dev/google-cloud-sdk/path.zsh.inc'
+
+# The next line enables shell command completion for gcloud.
+source '/Users/krazar/dev/google-cloud-sdk/completion.zsh.inc'
+export GOPATH=~/go
