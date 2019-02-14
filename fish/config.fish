@@ -1,5 +1,5 @@
-set default_user "paulirish"
-set default_machine "paulirish-macbookair2"
+set default_user "krazar"
+set default_machine "mbp-pierre"
 
 
 source ~/.config/fish/path.fish
@@ -15,7 +15,9 @@ if test -e "$HOME/.extra.fish";
 end
 
 # THEME PURE #
+
 set fish_function_path $HOME/.config/fish/functions/pure $fish_function_path
+
 
 export GOPATH=$HOME/.go/
 
@@ -97,9 +99,13 @@ set -gx LESS_TERMCAP_us \e'[04;38;5;146m' # begin underline
 # this currently messes with newlines in my prompt. lets debug it later.
 # test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
 
+<<<<<<< HEAD
 # tabtab source for yarn package
 # uninstall by removing these lines or running `tabtab uninstall yarn`
 [ -f /Users/paulirish/.config/yarn/global/node_modules/tabtab/.completions/yarn.fish ]; and . /Users/paulirish/.config/yarn/global/node_modules/tabtab/.completions/yarn.fish
 
 # rvm default
 
+=======
+[ -s "/Users/krazar/.jabba/jabba.fish" ]; and source "/Users/krazar/.jabba/jabba.fish"
+>>>>>>> script update
