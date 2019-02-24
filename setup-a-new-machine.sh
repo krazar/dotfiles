@@ -81,7 +81,7 @@ cp -Rp ~/Pictures ~/migration
 ### end of old machine backup
 ##############################################################################################################
 
-
+touch ~/.bash_profile
 
 ##############################################################################################################
 ### XCode Command Line Tools
@@ -139,7 +139,10 @@ export PATH=$HOME/.homebrew/bin:$HOME/.homebrew/sbin:$PATH
 ##############################################################################################################
 
 
+curl -sL https://github.com/shyiko/jabba/raw/master/install.sh | bash && . ~/.jabba/jabba.sh
 
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+nvm install 
 
 ##############################################################################################################
 ### install of common things

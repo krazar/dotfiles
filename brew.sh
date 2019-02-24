@@ -55,13 +55,18 @@ brew install mtr
     sudo chown root $mtrlocation/sbin/mtr
 
 
+brew install joplin
+brew install jruby
+brew install rbenv
+brew install graphviz
+brew install tmux
+brew install docker-compose
 # Install other useful binaries
 brew install the_silver_searcher
 brew install fzf
 
 brew install git
 brew install imagemagick --with-webp
-brew install node # This installs `npm` too using the recommended installation method
 brew install pv
 brew install rename
 brew install tree
