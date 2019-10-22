@@ -4,19 +4,9 @@
 	com = checkout master
 	med = merge develop --no-ff
 	c = commit -am
-	up = pull
-	p = push
-	s = status -s
-	st = status -s
-=======
-        cod = checkout develop
-	com = checkout master
-	med = merge develop --no-ff
-	c = commit -am
-
 	fpush = push --force
-	s = status
->>>>>>> 8585a08f430225274002c7dbb9273f878f5cca4e
+	st = status -s
+
 	sclone = clone --depth=1
 	amend = commit --amend --all
 	undocommit = reset HEAD~
@@ -27,14 +17,14 @@
  
 	df = diff --color --color-words --abbrev
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
-<<<<<<< HEAD
+
 	co = checkoutjkk
   release = "!f() { git com && npm version ${1-patch} && git push && git push --tags && git cod && git merge master --no-ff && git push &&  git com; }; f"
-=======
+
 	cherrypick = cherry-pick
 	cherry = cherry-pick
 	cp = cherry-pick
->>>>>>> 8585a08f430225274002c7dbb9273f878f5cca4e
+
 
 	# Show the diff between the latest commit and the current state
 	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
@@ -47,7 +37,9 @@
 [core]
 	excludesfile = ~/.gitignore
 	attributesfile = ~/.gitattributes
-	autocrlf = input
+
+	precomposeUnicode = true
+
 
 [pager]
 	# insanely beautiful diffs ==> npm install -g diff-so-fancy
@@ -89,19 +81,7 @@
 	tool = opendiff
 	renameLimit = 0
 
-# rewrites of repo paths
-[url "git@github.com:"]
-	insteadOf = "https://github.com/"
-	pushInsteadOf = "github:"
-	pushInsteadOf = "git://github.com/"
-	pushInsteadOf = "https://github.com/"
 
-[url "git://github.com/"]
-	insteadOf = "github:"
-
-[url "git@gist.github.com:"]
-	pushInsteadOf = "gist:"
-	pushInsteadOf = "git://gist.github.com/"
 	
 [url "git://gist.github.com/"]
 	insteadOf = "gist:"
@@ -126,11 +106,11 @@
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
 	required = true
-<<<<<<< HEAD
+
 [user]
-	email = marot.pierre@gmail.com
+	email = pierre@qualifio.com
 	name = Pierre Marot
-=======
+
 
 [fetch]
 	prune = true
@@ -145,9 +125,4 @@
 	showPatch = true
 [log]
 	date = relative
-	compactionHeuristic = true
-[user]
-	name = Pierre Marot
-	email = pierre@qualifio.com 
 
->>>>>>> 8585a08f430225274002c7dbb9273f878f5cca4e

@@ -35,8 +35,10 @@ bin/diff-highlight=======
 
 # fish shell
 fishd.*
+fish/config.fish.backup
 .config/fish/fish_history
 fish/fish_history
+fish/fish_variables
 
 # random
 shilocation
