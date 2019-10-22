@@ -67,9 +67,6 @@ zmodload zsh/terminfo
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
 
-# config for suggestions
-AUTOSUGGESTION_ACCEPT_RIGHT_ARROW=1
-
 export PURE_GIT_UNTRACKED_DIRTY=0
 
 # Automatically list directory contents on `cd`.
@@ -109,6 +106,10 @@ source ~/.bash_profile
 # The next line updates PATH for the Google Cloud SDK.
 source '/Users/krazar/dev/google-cloud-sdk/path.zsh.inc'
 
-# The next line enables shell command completion for gcloud.
-source '/Users/krazar/dev/google-cloud-sdk/completion.zsh.inc'
-export GOPATH=~/go
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+[ -s "/Users/krazar/.jabba/jabba.sh" ] && source "/Users/krazar/.jabba/jabba.sh"
+
