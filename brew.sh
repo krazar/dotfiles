@@ -83,5 +83,13 @@ brew install ncdu # find where your diskspace went
 
 brew install zsh
 
+
+#perso
+brew install jabba
+brew install kubernetes-cli
+brew install diff-so-fancy
+brew install ctop
+
+
 # Remove outdated versions from the cellar
 brew cleanup

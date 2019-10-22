@@ -52,7 +52,9 @@ brew cask install cyberduck
 brew cask install gas-mask
 brew cask install visual-studio-code
 brew cask install android-file-transfer
-brew cask install robotmongo
+brew cask install robot-3t
+brew cask install calibre
+brew cask install discord
 
 
 
