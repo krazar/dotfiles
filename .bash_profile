@@ -2,6 +2,8 @@
 # Load our dotfiles like ~/.bash_prompt, etc…
 #   ~/.extra can be used for settings you don’t want to commit,
 #   Use it to configure your PATH, thus it being first in line.
+#
+
 for file in ~/.{extra,bash_prompt,exports,aliases,functions}; do
     [ -r "$file" ] && source "$file"
 done
@@ -38,7 +40,7 @@ export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 
 # Enable history expansion with space
 # E.g. typing !!<space> will replace the !! with your last command
-bind Space:magic-space
+#bind Space:magic-space
 
 # Use standard ISO 8601 timestamp
 # %F equivalent to %Y-%m-%d
@@ -56,7 +58,7 @@ type shopt &> /dev/null && shopt -s histappend  # append to history, don't overw
 export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
 
 # Save multi-line commands as one command
-shopt -s cmdhist
+#shopt -s cmdhist
 
 # Save and reload the history after each command finishes
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"

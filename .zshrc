@@ -47,6 +47,7 @@ $b zsh-users/zsh-history-substring-search ./zsh-history-substring-search.zsh
 
 # suggestions
 $b tarruda/zsh-autosuggestions
+$b tarruda/zsh-users/autosuggestions
 
 # colors for all files!
 $b trapd00r/zsh-syntax-highlighting-filetypes
@@ -77,11 +78,11 @@ auto-ls () {
 chpwd_functions=( auto-ls $chpwd_functions )
 
 # Enable autosuggestions automatically
-zle-line-init() {
-    zle autosuggest-start
-}
+#zle-line-init() {
+#    zle autosuggest-start
+#}
 
-zle -N zle-line-init
+#zle -N zle-line-init
 
 
 # history mgmt
@@ -103,3 +104,4 @@ source ~/.bash_profile
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+

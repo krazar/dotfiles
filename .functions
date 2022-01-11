@@ -201,3 +201,10 @@ cond () {
 	fi
 	unset __conda_setup
 }
+
+adopt-unifi () {
+  for HOST in ap1 switch1 switch2
+  do
+    ssh $HOST './adopt.sh'
+  done
+}

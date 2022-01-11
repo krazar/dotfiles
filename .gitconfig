@@ -13,6 +13,7 @@
 	cherry = cherry-pick
 	cp = cherry-pick
 	diffbranch = !"git diff $(git merge-base HEAD origin/master)"
+        changelog = log --oneline --decorate
 
 	# show commit log of unique commits of this branch (not on master)
 	diffcommitsfrommaster = log --no-merges master..
@@ -136,3 +137,6 @@
 	showPatch = true
 [log]
 	date = relative
+[user]
+	name = pierremarot
+	email = pierre@qualifio.com
