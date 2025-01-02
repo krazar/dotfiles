@@ -14,6 +14,7 @@ case $- in
    *i*) source ~/.extra
 esac
 
+
 # generic colouriser
 GRC=`which grc`
 if [ "$TERM" != dumb ] && [ -n "$GRC" ]
@@ -35,7 +36,7 @@ export LESS_TERMCAP_ue=$'\E[0m'           # end underline
 export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 
 ##
-## gotta tune that bash_history…
+## HISTORY settings... 
 ##
 
 # Enable history expansion with space
@@ -49,14 +50,30 @@ export HISTTIMEFORMAT='%F %T '
 
 # keep history up to date, across sessions, in realtime
 #  http://unix.stackexchange.com/a/48113
-export HISTCONTROL="ignoredups"       # no duplicate entries, but keep space-prefixed commands
+export HISTCONTROL="ignoredups"       # no duplicate entries, but keep space-prefixed commands. (bash-sensible uses "erasedups:ignoreboth" but i think i validated this already?)
+# here's the popularity amonngst other-peoples-dotfiles... (cmd: ag --nogroup --noheading --nofilename --hidden -o "HISTCONTROL.*" |  grep -E -o "(ignore|erase)[a-z:]*" | sort | uniq -c | sort -r)
+#      5 ignoreboth
+#      4 ignoredups
+#      2 erasedups:ignoreboth
+#      1 ignorespace:erasedups
+#      1 ignoredups:erasedups
+#      1 erasedups
+
 export HISTSIZE=100000                          # big big history (default is 500)
 export HISTFILESIZE=$HISTSIZE                   # big big history
-type shopt &> /dev/null && shopt -s histappend  # append to history, don't overwrite it
+shopt -s histappend                             # append to history, don't overwrite it
+shopt -s cmdhist                                # Save multi-line commands as one command
+
+
+# Enable incremental history search with up/down arrows (also Readline goodness)
+# Learn more about this here: http://codeinthehole.com/writing/the-most-important-command-line-tip-incremental-history-searching-with-inputrc/
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
 
 # Don't record some commands
 export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
 
+# Save and reload the history after each command finishes. Also look for any conflicting prompt_command definitions!!
 # Save multi-line commands as one command
 #shopt -s cmdhist
 
@@ -75,6 +92,7 @@ fi;
 ##
 ## Completion…
 ##
+
 
 if [[ -n "$ZSH_VERSION" ]]; then  # quit now if in zsh
     return 1 2> /dev/null || exit 1;

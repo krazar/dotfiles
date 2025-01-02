@@ -1,3 +1,10 @@
+
+
+
+[ -n "$PS1" ] && source ~/.bash_profile
+
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export PATH="/Users/pierremarot/git-fuzzy/bin:$PATH"
 export PATH="/Users/pierremarot/bin:$PATH"
 export PATH=${PATH}:`go env GOPATH`/bin

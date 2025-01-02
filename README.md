@@ -4,29 +4,21 @@
 * You're quite welcome to make suggestions, however I may decline if it's not of personal value to me.
 * If you're starting off anew, consider forking [mathias](https://github.com/mathiasbynens/dotfiles/) or [alrra](https://github.com/alrra/dotfiles/). [paulmillr](https://github.com/paulmillr/dotfiles) and [gf3](https://github.com/gf3/dotfiles) also have great setups
 
+
 ## Setup
-#### installing & using
 
-* fork this to your own acct
-* clone that repo
-* read and run parts of `setup-a-new-machine.sh`
-* read and run `symlink-setup.sh`
-  * git config needs attention, read the notes.
-* use it. yay!
-
-#### maintenance
-
-* commit/push changes you want.
-* you can also hypothetically cherry-pick commits from me and mathias and our fork ecosystem.
+I would not suggest you just wholesale use my dotfiles. But there's a few files where there's great goodies you can steal.
 
 #### shell
 
-This repo contains config for bash, zsh, and fish. As of March 2016, I'm using fish shell mostly, but fall back to bash once in a while. The bash and fish stuff are both well maintained; zsh, less so. If you're using fish you'll want to do a `git submodule update --init`.
-
+This repo contains config for fish and bash. As of 2016, I primarily use `fish` shell, but fall back to `bash` once in a while. The bash and fish stuff are both well maintained. If you're using fish you'll want to do a `git submodule update --init`.
 
 ## my favorite parts.
 
-### [`.aliases`](https://github.com/paulirish/dotfiles/blob/master/.aliases) and [`.functions`](https://github.com/paulirish/dotfiles/blob/master/.functions)
+### aliases and functions
+
+* [`aliases.fish`](./fish/aliases.fish) and [`functions.fish`](./fish/functions.fish) and [`fish/functions/*`](./fish/functions/)
+* [`.aliases`](./.aliases) and [`.functions`](./.functions)
 
 So many goodies.
 
@@ -39,7 +31,8 @@ Basically it makes typing into the prompt amazing.
 * case insensitivity.
 * tab all the livelong day.
 
-
+### [.gitconfig](./.gitconfig)
+* err'body gotta have their aliases. I'm no different.
 
 ### Moving around in folders (`z`, `...`, `cdf`)
 `z` helps you jump around to whatever folder. It uses actual real magic to determine where you should jump to. Seperately there's some `...` aliases to shorten `cd ../..` and `..`, `....` etc. Then, if you have a folder open in Finder, `cdf` will bring you to it.
@@ -54,21 +47,11 @@ cdf       # cd to whatever's up in Finder
 Lastly, I use `open .` to open Finder from this path. (That's just available normally.)
 
 
-
 ## overview of files
 
-####  Automatic config
-* `.vimrc`, `.vim` - vim config, obv.
-* `.inputrc` - behavior of the actual prompt line
 
 #### shell environment
-* `.aliases`
-* `.bash_profile`
-* `.bash_prompt`
-* `.bashrc`
-* `.exports`
-* `.functions`
-* `.extra` - not included, explained below
+* `.aliases`, `.bash_profile`, `.bash_prompt`, `.bashrc`, `.exports`, `.functions`
 
 #### manual run
 * `setup-a-new-machine.sh` - random apps i need installed
@@ -77,8 +60,6 @@ Lastly, I use `open .` to open Finder from this path. (That's just available nor
 * `brew.sh` & `brew-cask.sh` - homebrew initialization
 
 #### git, brah
-* `.git`
-* `.gitattributes`
 * `.gitconfig`
 * `.gitignore`
 
@@ -91,46 +72,46 @@ There will be items that don't belong to be committed to a git repo, because eit
 
 I have some EXPORTS, my PATH construction, and a few aliases for ssh'ing into my servers in there.
 
-I don't know how other folks manage their $PATH, but this is how I do mine:
 
-```shell
-# The top-most paths override here.
-      PATH=/opt/local/bin
-PATH=$PATH:/opt/local/sbin
-PATH=$PATH:/bin
-PATH=$PATH:~/.rvm/bin
-PATH=$PATH:~/code/git-friendly
-# ...
-
-export PATH
-```
-
-
-### Sensible OS X defaults
+### Sensible OS X defaults in `.macos`
 
 Mathias's repo is the canonical for this, but you should probably run his or mine after reviewing it.
 
-```bash
-./.macos
-```
 
 ### `~/bin`
 
-One-off binaries that aren't via an npm global or homebrew. [git open](https://github.com/paulirish/git-open), [wifi-password](https://github.com/rauchg/wifi-password), [coloredlogcat](https://developer.sinnerschrader-mobile.com/colored-logcat-reloaded/507/), [git-overwritten](https://github.com/mislav/dotfiles/blob/master/bin/git-overwritten), and `subl` for Sublime Text.
+One-off binaries that aren't via an npm global or homebrew. [git open](https://github.com/paulirish/git-open), `subl` for Sublime Text, and some other git utilities.
 
-### Syntax highlighting for these files
-
-If you edit this stuff, install [Dotfiles Syntax Highlighting](https://github.com/mattbanks/dotfiles-syntax-highlighting-st2) via [Package Control](http://wbond.net/sublime_packages/package_control)
 
 ### 2020 update
 
 Rust folks have made a few things that are changing things.
 
  - most folks know `bat`  as a `cat` replacement
- - https://github.com/dandavison/delta seems a lot better than the diff-so-fancy project that i started. :/
- - https://github.com/ogham/exa is better `ls` and gets all the trapd00r/LS_COLORS stuff etc.
+ - https://github.com/dandavison/delta is a bit nicer than the diff-so-fancy project that i started. :/
+ - https://github.com/eza-community/eza is better `ls` and gets all the trapd00r/LS_COLORS stuff etc.
  - https://github.com/bigH/git-fuzzy interactive git thing. deprecates my `git recent` script. and probably some other things.
 
- Also I'd like to migrate to using homesick or https://www.atlassian.com/git/tutorials/dotfiles
+### Dotfiles mgmt todo
+ Also I'd like to migrate to using one of these:
+ - homesick or 
+ - https://www.atlassian.com/git/tutorials/dotfiles
+ - https://github.com/nix-community/home-manager
+ - https://www.chezmoi.io/
 
  also interested in https://github.com/dandavison/open-in-editor
+
+### SSH authenticate with security key
+
+(presumably you've already upgraded from passwords to using ssh public key authentication.. but this is an alternative if you want the security key challenge)
+
+Been doing this for a while.. forgot how i learned it and nobody has it documented that I can find...
+
+Run on client machine:
+
+    ssh-add -L | grep publickey
+
+This outputs a `ecdsa-sha2-nistp256` key for me. I know it's registered for my hardware security key. (I don't know how it got registered with the SSH agent but w/e.)
+
+Put that in whatever `authorized_keys` of your remote host. That's it.
+

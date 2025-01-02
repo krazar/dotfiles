@@ -14,20 +14,89 @@ function subl --description 'Open Sublime Text'
   end
 end
 
-function loc --description "zfz with locatef"
-  glocate --database=(brew --prefix)/var/locate/locatedb --all --ignore-case --null $argv | ggrep --null --invert-match --extended-regexp '~$' | fzf --read0 -0 -1 -m
-end
 
-function killf
-  if ps -ef | sed 1d | fzf -m | awk '{print $2}' > $TMPDIR/fzf.result
-    kill -9 (cat $TMPDIR/fzf.result)
+function kill_process --description 'Kill process that user selects in fzf (from ps aux output)'
+  set -l pid (ps aux | fzf -m --header-lines=1 | awk '{print $2}')
+
+  if test -n "$pid"
+    echo "Killing processes: $pid"
+    kill -9 $pid
   end
 end
+
+
+function kill_port --description 'Select a port to kill, by pid, port, or command line'
+
+  # Function to get the command line for a given PID
+  function get_command -a pid
+    ps -p $pid | awk 'NR>1 {for (i=4; i<=NF; i++) {printf "%s ", $i}; print ""}'
+  end
+
+  # Find listening processes, get commands, and format output
+  lsof -iTCP -sTCP:LISTEN -P | awk '{print $2, $9}' | uniq | tail -n +2 | \
+    while read -l pid port
+      set -l command (get_command $pid)
+      set -l port (string pad -w 8 (string replace 'localhost' '' $port))
+      set -l pid (string pad --right -w 6 $pid)
+      echo -e "$pid $port $command"  | column
+    end | \
+
+    # Pipe the output to fzf for selection. Grab pid and show pstree
+    fzf --exact --tac --preview 'pstree -p (echo {} | awk "{print $2}")' --preview-window=down,30% --header "Select a process to kill (PID Command Port):" | \
+
+    # Kill the selected process
+    awk '{print $1}' | xargs -r kill -9
+end
+
 
 function clone --description "clone something, cd into it. install it."
     git clone --depth=1 $argv[1]
     cd (basename $argv[1] | sed 's/.git$//')
     yarn install
+end
+
+
+function renameurldecode
+    for file in *
+        set -l original $file
+        set -l decoded (python3 -c "import urllib.parse; print(urllib.parse.unquote_plus('$original'))")
+        if test "$original" != "$decoded"
+            mv "$original" "$decoded"
+        end
+    end
+end
+
+function notif --description "make a macos notification that the prev command is done running"
+  #  osascript -e 'display notification "hello world!" with title "Greeting" sound name "Submarine"'
+  osascript \
+    -e "on run(argv)" \
+    -e "return display notification item 1 of argv with title \"command done\" sound name \"Submarine\"" \
+    -e "end" \
+    -- "$history[1]"
+end
+
+function beep --description "make two beeps"
+  echo -e '\a'; sleep 0.1; echo -e '\a';
+end
+
+function all_binaries_in_path --description \
+  "list all binaries available in \$PATH (incl conflicts). pipe it to grep. top-most are what's used, in case of conflicts"
+  # based on https://unix.stackexchange.com/a/120790/110766 but tweaked to work on mac. and then made it faster.
+  find -L $PATH -maxdepth 1 -perm +111 -type f 2>/dev/null
+end
+
+function my_paths --description "list paths, in order"
+  echo "#  "
+  printf '%s\n' (string split \n $PATH)
+end
+
+function stab --description "stabalize a video"
+  set -l vid $argv[1]
+  ffmpeg -i "$vid" -vf vidstabdetect=stepsize=32:result="$vid.trf" -f null -;
+  ffmpeg -i "$vid" -b:v 5700K -vf vidstabtransform=interpol=bicubic:input="$vid.trf" "$vid.mkv";  # :optzoom=2 seems nice in theory but i dont love it. kinda want a combo of 1 and 2. (dont zoom in past the static zoom level, but adaptively zoom out to full when possible)
+  ffmpeg -i "$vid" -i "$vid.mkv" -b:v 3000K -filter_complex hstack "$vid.stack.mkv"
+  # vid=Dalton1990/Paultakingusaroundthehouseagai ffmpeg -i "$vid.mp4" -i "$vid.mkv" -b:v 3000K -filter_complex hstack $HOME/Movies/"Paultakingusaroundthehouseagai.stack.mkv"
+  command rm $vid.trf
 end
 
 
@@ -43,20 +112,46 @@ function md --wraps mkdir -d "Create a directory and cd into it"
   end
 end
 
+# yes I love this gross combo of shell script, escapes, and node.
 function gz --d "Get the gzipped size"
   printf "%-20s %12s\n"  "compression method"  "bytes"
-  printf "%-20s %'12.0f\n"  "original"         (cat "$argv[1]" | wc -c)
-  
+  # TODO.. omg theres no need to go backwards. i can do this in 1 pass.
+  set origstr (printf "%-20s %'12.0f"  "original"         (cat "$argv[1]" | wc -c))
+  echo $origstr
+  set -l array "$origstr"
+
   # -5 is what GH pages uses, dunno about others
   # fwiw --no-name is equivalent to catting into gzip
-  printf "%-20s %'12.0f\n"  "gzipped (-5)"     (cat "$argv[1]" | gzip -5 -c | wc -c)
-  printf "%-20s %'12.0f\n"  "gzipped (--best)" (cat "$argv[1]" | gzip --best -c | wc -c)
-  
+  set -a array (printf "%-20s %'12.0f"  "gzipped (-5)"     (cat "$argv[1]" | gzip -5 -c | wc -c)); echo $array[-1]
+  set -a array (printf "%-20s %'12.0f"  "gzipped (--best)" (cat "$argv[1]" | gzip --best -c | wc -c)); echo $array[-1]
+
+
   # brew install brotli to get these as well
   if hash brotli
-  # googlenews uses about -5, walmart serves --best 
-  printf "%-20s %'12.0f\n"  "brotli (-q 5)"    (cat "$argv[1]" | brotli -c --quality=5 | wc -c)
-  printf "%-20s %'12.0f\n"  "brotli (--best)"  (cat "$argv[1]" | brotli -c --best | wc -c)
+  # googlenews uses about -5, walmart serves --best
+  set -a array (printf "%-20s %'12.0f\n"  "brotli (-q 5)"    (cat "$argv[1]" | brotli -c --quality=5 | wc -c)); echo $array[-1]
+  # set -a array (printf "%-20s %'12.0f\n"  "brotli (--best)"  (cat "$argv[1]" | brotli -c --best | wc -c)); echo $array[-1]
+  end
+
+  # brew install zstd to get these as well
+  if hash zstd
+  set -a array (printf "%-20s %'12.0f\n"  "zstd (-3)"      (cat "$argv[1]" | zstd -c -3 - | wc -c)); echo $array[-1]
+  set -a array (printf "%-20s %'12.0f\n"  "zstd (--19)"    (cat "$argv[1]" | zstd -c -19 - | wc -c)); echo $array[-1]
+  # set -a array (printf "%-20s %'12.0f\n"  "zstd (--22 --ultra)"    (cat "$argv[1]" | zstd -c -22 --ultra - | wc -c)); echo $array[-1]
+  end
+
+  sleep 0.05
+  
+  for item in $array
+    # ANSI escape cursor movement https://tldp.org/HOWTO/Bash-Prompt-HOWTO/x361.html
+    printf "\033[1A"  # up 1 row
+  end
+
+  set orig (string replace --all "," "" (string match --regex "  [\d,]+" $origstr))
+  for item in $array
+    printf "$item   "
+    set bytesnum (string replace --all "," "" (string match --regex "  [\d,]+" $item))
+    echo "wid = $COLUMNS - 40; console.log('█'.repeat($bytesnum * wid / $orig) + '░'.repeat(wid - ($bytesnum * wid / $orig)))" | node
   end
 end
 
@@ -70,47 +165,30 @@ function shellswitch
 	chsh -s (brew --prefix)/bin/$argv
 end
 
-function upgradeyarn
-  curl -o- -L https://yarnpkg.com/install.sh | bash
-end
-
-function fuck -d 'Correct your previous console command'
-    set -l exit_code $status
-    set -l eval_script (mktemp 2>/dev/null ; or mktemp -t 'thefuck')
-    set -l fucked_up_commandd $history[1]
-    thefuck $fucked_up_commandd > $eval_script
-    . $eval_script
-    rm $eval_script
-    if test $exit_code -ne 0
-        history --delete $fucked_up_commandd
-    end
-end
 
 # requires my excellent `npm install -g statikk`
-function server -d 'Start a HTTP server in the current dir, optionally specifying the port'    
+function server -d 'Start a HTTP server in the current dir, optionally specifying the port'
+    # arg can either be port number or extra args to statikk
     if test $argv[1]
+      if string match -qr '^-?[0-9]+(\.?[0-9]*)?$' -- "$argv[1]"
         set port $argv[1]
-        statikk --open --port "$port"
+        # fancy argv thing to pass all remaining args. eg `server --cors --jsprof`
+        statikk --open --port $argv[1..-1]
+      else
+        statikk --open $argv[1..-1]
+      end
+
     else
         statikk --open
     end
 end
 
 
-function emptytrash -d 'Empty the Trash on all mounted volumes and the main HDD. then clear the useless sleepimage'
-    sudo rm -rfv "/Volumes/*/.Trashes"
-    grm -rf "~/.Trash/*"
-    rm -rfv "/Users/paulirish/Library/Application Support/stremio/Cache"
-    rm -rfv "/Users/paulirish/Library/Application Support/stremio/stremio-cache"
-    rm -rfv "~/Library/Application Support/Spotify/PersistentCache/Update/*.tbz"
-    rm -rfv ~/Library/Caches/com.spotify.client/Data
-    rm -rfv ~/Library/Caches/Firefox/Profiles/98ne80k7.dev-edition-default/cache2
+function conda -d 'lazy initialize conda'
+  functions --erase conda
+  eval /opt/miniconda3/bin/conda "shell.fish" "hook" | source
+  # There's some opportunity to use `psub` but I don't really understand it.
+  conda $argv
 end
 
-function cond -d 'initialize conda'
-  # >>> conda initialize >>>
-  # !! Contents within this block are managed by 'conda init' !!
-  eval /opt/miniconda3/bin/conda "shell.fish" "hook" $argv | source
-  # <<< conda initialize <<<
-  conda activate py2
-end
+# NVM doesnt support fish and its stupid to try to make it work there.
