@@ -1,73 +1,51 @@
 #!/bin/bash
 
-# Install command-line tools using Homebrew
 
-# (Optionally) Turn off brew's analytics https://docs.brew.sh/Analytics
-# brew analytics off
-
-
-# GNU core utilities (those that come with OS X are outdated)
+brew install certifi
+brew install cmake
 brew install coreutils
-brew install moreutils
-# GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed
-brew install findutils
-# GNU `sed`
-brew install gnu-sed
-
-
-# Updated shells
-# Note: don’t forget to add `/usr/local/bin/<EACHSHELL>` to `/etc/shells` before running `chsh`.
-brew install fish
-
-brew install bash-completion
-
-
-# Install wget
-brew install wget
-
-# Install more recent versions of some OS X tools
-brew install vim
-brew install nano
-brew install grep
-
-# z hopping around folders
-brew install z
-
-# run this script when this file changes guy.
+brew install dav1d
+brew install dnsmasq
 brew install entr
-
-# github util
-brew install gh
-# nicer git diffs
-brew install git-delta
-
-# better `top`
-brew install glances
-
-brew install shellcheck # linting for .sh files
-
-
-# mtr - ping & traceroute. best.
-brew install mtr
-   # `abbr mtr "sudo mtr"` to avoid forgetting.
-
-# Install other useful binaries
-brew install the_silver_searcher # ack is an alternative, tbh i forget which i like more.
+brew install findutils
+brew install fish
+brew install fontconfig
+brew install frei0r
 brew install fzf
-
-brew install imagemagick
-brew install node # This installs `npm` too using the recommended installation method
+brew install gdu
+brew install gh
+brew install git-delta
+brew install gnu-sed
+brew install grep
+brew install gron
+brew install jbig2dec
+brew install jq
+brew install k9s
+brew install kubernetes-cli
+brew install leptonica
+brew install libarchive
+brew install libidn
+brew install libsodium
+brew install libtasn1
+brew install mkcert
+brew install moreutils
+brew install mpdecimal
+brew install mtr
+brew install nano
+brew install nettle
+brew install ninja
+brew install nmap
+brew install oven-sh/bun/bun
+brew install pixman
+brew install pkgconf
+brew install python-packaging
 brew install rename
+brew install shellcheck
+brew install snapcast
+brew install sops
+brew install sqlite
+brew install tcptraceroute
+brew install the_silver_searcher
 brew install tree
-brew install ffmpeg
-
-# json stuff
-brew install jq gron
-
-# brew install ncdu # find where your diskspace went
-brew install gdu # available as gdu-go. faster than ncdu on SSD's.
-
-
-brew install scrcpy # control/view android phone from PC. amazing
-brew install youtube-dl
-
+brew install wget
+brew install z

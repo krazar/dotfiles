@@ -18,6 +18,7 @@ cd ~/migration
 
 # what is worth reinstalling?
 brew leaves              > brew-list.txt    # all top-level brew installs
+brew list --cask         > brew-cask.txt
 npm list -g --depth=0    > npm-g-list.txt
 
 # then compare brew-list to what's in `brew.sh`
