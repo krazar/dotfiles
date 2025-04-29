@@ -27,13 +27,12 @@ npm list -g --depth=0    > npm-g-list.txt
 
 # backup some dotfiles likely not under source control
 cp -Rp \
+    ~/.azuredatastudio \
+    ~/.config \
     ~/.bash_history \
     ~/.extra ~/.extra.fish \
     ~/.gitconfig.local \
     ~/.gnupg \
-    ~/.nano \
-    ~/.nanorc \
-    ~/.netrc \
     ~/.ssh \
     ~/.z   \
         ~/migration/home
@@ -42,15 +41,11 @@ cp -Rp ~/Documents ~/migration
 
 cp -Rp /Library/Preferences/SystemConfiguration/com.apple.airport.preferences.plist ~/migration/rootLibrary/Preferences/SystemConfiguration/ # wifi
 
-cp -Rp ~/Library/Preferences/net.limechat.LimeChat.plist ~/migration/Library/Preferences/
+
 cp -Rp ~/Library/Preferences/com.tinyspeck.slackmacgap.plist ~/migration/Library/Preferences/
 
 cp -Rp ~/Library/Services ~/migration/Library/ # automator stuff
 cp -Rp ~/Library/Fonts ~/migration/Library/ # all those fonts you've installed
-
-# editor settings & plugins
-cp -Rp ~/Library/Application\ Support/Sublime\ Text\ * ~/migration/Library/"Application Support"
-cp -Rp ~/Library/Application\ Support/Code\ -\ Insider* ~/migration/Library/"Application Support"
 
 # also consider...
 # random git branches you never pushed anywhere?
