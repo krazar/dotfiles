@@ -14,6 +14,7 @@ mkdir -p ~/migration/Library/Preferences/
 mkdir -p ~/migration/Library/Application Support/
 mkdir -p ~/migration/rootLibrary/Preferences/SystemConfiguration/
 
+
 cd ~/migration
 
 # what is worth reinstalling?
@@ -55,6 +56,7 @@ cp -Rp ~/Library/Application\ Support/Code\ -\ Insider* ~/migration/Library/"App
 # random git branches you never pushed anywhere?
 # git untracked files (or local gitignored stuff). stuff you never added, but probably want..
 
+# Table Plus backup
 
 # OneTab history pages, because chrome tabs are valuable.
 
