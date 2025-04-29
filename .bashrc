@@ -5,8 +5,6 @@
 
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-export PATH="/Users/pierremarot/git-fuzzy/bin:$PATH"
-export PATH="/Users/pierremarot/bin:$PATH"
 export PATH=${PATH}:`go env GOPATH`/bin
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
