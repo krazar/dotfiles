@@ -1,21 +1,27 @@
 #!/bin/bash
 
-
+brew install bash
 brew install certifi
 brew install cmake
+brew install commandbox
+brew install cookiecutter
 brew install coreutils
 brew install dav1d
 brew install dnsmasq
 brew install entr
+brew install eza
 brew install findutils
 brew install fish
 brew install fontconfig
 brew install frei0r
+brew install git-lfs
 brew install fzf
 brew install gdu
 brew install gh
 brew install git-delta
 brew install gnu-sed
+brew install gnupg
+brew install go
 brew install grep
 brew install gron
 brew install jbig2dec
@@ -35,16 +41,20 @@ brew install nano
 brew install nettle
 brew install ninja
 brew install nmap
+brew install opencv
 brew install oven-sh/bun/bun
 brew install pixman
 brew install pkgconf
 brew install python-packaging
+brew install qrencode
 brew install rename
+brew install saulpw/vd/visidata
 brew install shellcheck
 brew install snapcast
 brew install sops
 brew install sqlite
 brew install tcptraceroute
+brew install telnet
 brew install the_silver_searcher
 brew install tree
 brew install wget
